@@ -1,15 +1,15 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { BigNumber } from 'bignumber.js'
 import useModal from 'hooks/useModal'
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
-import useTokenBalance from '../../../hooks/useTokenBalance'
 import { addressMap } from '../../../bao/lib/constants'
+import useTokenBalance from '../../../hooks/useTokenBalance'
 import { getDisplayBalance } from '../../../utils/formatBalance'
 import Button from '../../Button'
 import WalletProviderModal from '../../WalletProviderModal'
 import AccountModal from './AccountModal'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { BigNumber } from 'bignumber.js'
 
 interface AccountButtonProps {}
 
@@ -37,7 +37,12 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
 						text={
 							<>
 								Connect Wallet{' '}
-								<FontAwesomeIcon icon="link" style={{ marginLeft: '${(props) => props.theme.spacing[1]}px' }} />
+								<FontAwesomeIcon
+									icon="link"
+									style={{
+										marginLeft: '${(props) => props.theme.spacing[1]}px',
+									}}
+								/>
 							</>
 						}
 						border={true}
@@ -52,12 +57,17 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
 								{account.slice(account.length - 4, account.length)}
 								<FontAwesomeIcon
 									icon="angle-double-right"
-									style={{ margin: '0 ${(props) => props.theme.spacing[1]}px', color: '${(props) => props.theme.color.text[100]}' }}
+									style={{
+										margin: '0 ${(props) => props.theme.spacing[1]}px',
+										color: '${(props) => props.theme.color.text[100]}',
+									}}
 								/>
 								{new BigNumber(getDisplayBalance(wethBalance)).toFixed(4)}
 								<FontAwesomeIcon
 									icon={['fab', 'ethereum']}
-									style={{ marginLeft: '${(props) => props.theme.spacing[1]}px' }}
+									style={{
+										marginLeft: '${(props) => props.theme.spacing[1]}px',
+									}}
 								/>
 							</>
 						}
@@ -74,7 +84,12 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
 						text={
 							<>
 								Connect Wallet{' '}
-								<FontAwesomeIcon icon="link" style={{ marginLeft: '${(props) => props.theme.spacing[1]}px' }} />
+								<FontAwesomeIcon
+									icon="link"
+									style={{
+										marginLeft: '${(props) => props.theme.spacing[1]}px',
+									}}
+								/>
 							</>
 						}
 						border={true}

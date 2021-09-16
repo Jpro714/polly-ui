@@ -1,14 +1,13 @@
+import BigNumber from 'bignumber.js'
+import { Multicall as MC } from 'ethereum-multicall'
 import { useCallback, useEffect, useState } from 'react'
 import Web3 from 'web3'
-import BigNumber from 'bignumber.js'
 import { AbiItem } from 'web3-utils'
-import { addressMap, supportedNests } from '../bao/lib/constants'
-import GraphUtil from '../utils/graph'
-import { getBalanceNumber, getDisplayBalance, getAnalytics } from '../utils/formatBalance'
-import MultiCall from '../utils/multicall'
-import { Multicall as MC } from 'ethereum-multicall'
-
 import experipieAbi from '../bao/lib/abi/experipie.json'
+import { addressMap, supportedNests } from '../bao/lib/constants'
+import { getAnalytics, getBalanceNumber } from '../utils/formatBalance'
+import GraphUtil from '../utils/graph'
+import MultiCall from '../utils/multicall'
 import useAllFarmTVL from './useAllFarmTVL'
 
 const useHomeAnalytics = () => {

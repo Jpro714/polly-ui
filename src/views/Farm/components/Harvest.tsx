@@ -13,9 +13,12 @@ import useReward from 'hooks/useReward'
 import useSubValues from 'hooks/useSubValues'
 import useValues from 'hooks/useValues'
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { StyledCardActions, StyledCardContentInner, StyledCardHeader } from './styles'
+import {
+	StyledCardActions,
+	StyledCardContentInner,
+	StyledCardHeader,
+} from './styles'
 
 interface HarvestProps {
 	pid: number

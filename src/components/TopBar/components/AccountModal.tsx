@@ -1,13 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import pollyIcon from 'assets/img/logo.svg'
 import wethIcon from 'assets/img/assets/WETH.png'
+import pollyIcon from 'assets/img/logo.svg'
 import { getPollyAddress } from 'bao/utils'
+import { BigNumber } from 'bignumber.js'
 import useBao from 'hooks/useBao'
 import useTokenBalance from 'hooks/useTokenBalance'
 import React, { useCallback } from 'react'
+import { Col, Row } from 'react-bootstrap'
 import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
 import { getDisplayBalance } from 'utils/formatBalance'
+import { addressMap } from '../../../bao/lib/constants'
 import Button from '../../Button'
 import CardIcon from '../../CardIcon'
 import Label from '../../Label'
@@ -16,9 +19,6 @@ import ModalContent from '../../ModalContent'
 import ModalTitle from '../../ModalTitle'
 import Spacer from '../../Spacer'
 import Value from '../../Value'
-import { Col, Row } from 'react-bootstrap'
-import { addressMap } from '../../../bao/lib/constants'
-import { BigNumber } from 'bignumber.js'
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 	const { account, reset } = useWallet()
@@ -48,7 +48,11 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 								</span>
 							</CardIcon>
 							<StyledBalance>
-								<Value value={new BigNumber(getDisplayBalance(wethBalance)).toFixed(4)} />
+								<Value
+									value={new BigNumber(getDisplayBalance(wethBalance)).toFixed(
+										4,
+									)}
+								/>
 								<Label text="WETH Balance" />
 							</StyledBalance>
 						</StyledBalanceWrapper>

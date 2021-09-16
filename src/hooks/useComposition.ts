@@ -1,17 +1,17 @@
 import BigNumber from 'bignumber.js'
-import { provider } from 'web3-core'
 import { Nest, NestComponent } from 'contexts/Nests/types'
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { useWallet } from 'use-wallet'
-import useBao from './useBao'
-import useMulticall from './useMulticall'
 import { getBalance, getContract, getCreamContract } from 'utils/erc20'
 import { decimate, getBalanceNumber } from 'utils/formatBalance'
-import { getWethPriceLink } from '../bao/utils'
 import GraphClient from 'utils/graph'
 import MultiCall from 'utils/multicall'
+import { provider } from 'web3-core'
 import { addressMap } from '../bao/lib/constants'
+import { getWethPriceLink } from '../bao/utils'
+import useBao from './useBao'
+import useMulticall from './useMulticall'
 
 const useComposition = (nest: Nest) => {
   const { ethereum }: { ethereum: provider } = useWallet()

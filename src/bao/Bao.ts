@@ -1,9 +1,9 @@
 import Web3 from 'web3'
-import { Contracts } from './lib/contracts'
+import { AddAccount, provider } from 'web3-core/types'
 import { Account } from './lib/accounts.js'
-import { EVM } from './lib/evm.js'
 import { contractAddresses } from './lib/constants'
-import { provider, AddAccount } from 'web3-core/types'
+import { Contracts } from './lib/contracts'
+import { EVM } from './lib/evm.js'
 
 export interface BaoOptions {
   confirmationType?: number

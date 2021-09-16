@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js'
-import { Contract } from 'web3-eth-contract'
-import _ from 'lodash'
-import { addressMap } from './lib/constants'
-import { Bao } from './Bao'
-import { Farm } from '../contexts/Farms'
 import { ethers } from 'ethers'
+import _ from 'lodash'
+import { Contract } from 'web3-eth-contract'
+import { Farm } from '../contexts/Farms'
+import { Bao } from './Bao'
+import { addressMap } from './lib/constants'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,

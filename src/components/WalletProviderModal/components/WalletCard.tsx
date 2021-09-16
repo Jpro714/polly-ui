@@ -1,12 +1,12 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
+import { useWallet } from 'use-wallet'
 import Button from '../../Button'
-import WalletModalCard from '../../WalletModalCard'
 import CardContent from '../../CardContent'
 import CardIcon from '../../CardIcon'
 import CardTitle from '../../CardTitle'
 import Spacer from '../../Spacer'
-import { useWallet } from 'use-wallet'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import WalletModalCard from '../../WalletModalCard'
 
 interface WalletCardProps {
 	icon: React.ReactNode

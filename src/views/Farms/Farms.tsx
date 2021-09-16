@@ -1,4 +1,5 @@
 import pollyNests from 'assets/img/polly-nests.png'
+import { BigNumber } from 'bignumber.js'
 import Button from 'components/Button'
 import Container from 'components/Container'
 import Page from 'components/Page'
@@ -8,15 +9,10 @@ import WalletProviderModal from 'components/WalletProviderModal'
 import useModal from 'hooks/useModal'
 import React, { useState } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
 import Farm from '../Farm'
 import Balances from './components/Balances'
 import FarmCards from './components/FarmCards'
-import { Badge } from 'react-bootstrap'
-import { getDisplayBalance } from 'utils/formatBalance'
-import { SpinnerLoader } from 'components/Loader'
-import { BigNumber } from 'bignumber.js'
 import { StyledExternalLink, StyledInfo } from './components/styles'
 
 const Farms: React.FC = () => {
@@ -39,7 +35,12 @@ const Farms: React.FC = () => {
 							<Container>
 								<StyledInfo>
 									❗️{' '}
-									<span style={{ fontWeight: 700, color: '${(props) => props.theme.color.red}' }}>
+									<span
+										style={{
+											fontWeight: 700,
+											color: '${(props) => props.theme.color.red}',
+										}}
+									>
 										Attention:
 									</span>{' '}
 									Be sure to read the{' '}

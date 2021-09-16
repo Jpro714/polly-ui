@@ -1,13 +1,15 @@
+import { BigNumber } from 'bignumber.js'
 import Button from 'components/Button'
 import { SpinnerLoader } from 'components/Loader'
+import Tooltipped from 'components/Tooltipped'
 import { Nest } from 'contexts/Nests'
 import useComposition from 'hooks/useComposition'
+import useGraphPriceHistory from 'hooks/useGraphPriceHistory'
 import useNestRate from 'hooks/useNestRate'
 import React, { useMemo } from 'react'
 import 'react-tabs/style/react-tabs.css'
 import { useWallet } from 'use-wallet'
 import { getDisplayBalance } from 'utils/formatBalance'
-import Tooltipped from 'components/Tooltipped'
 import {
 	AssetImage,
 	AssetImageContainer,
@@ -22,10 +24,8 @@ import {
 	MobileListText,
 	MobileListTitle,
 	MobileNestLink,
-	NestImage,
+	NestImage
 } from './styles'
-import useGraphPriceHistory from 'hooks/useGraphPriceHistory'
-import { BigNumber } from 'bignumber.js'
 
 const NestListItem: React.FC<NestListItemProps> = ({ nest }) => {
 	const { account } = useWallet()
@@ -87,7 +87,7 @@ const NestListItem: React.FC<NestListItemProps> = ({ nest }) => {
 							<>
 								<span
 									style={{
-										color: indexPriceChange24h.gt(0) ? '${(props) => props.theme.color.green}' : '${(props) => props.theme.color.red}',
+										color: indexPriceChange24h.gt(0) ? 'green' : 'red',
 									}}
 								>
 									{priceHistory && getDisplayBalance(indexPriceChange24h, 0)}
@@ -102,7 +102,7 @@ const NestListItem: React.FC<NestListItemProps> = ({ nest }) => {
 				<ListCol width={'15%'} align={'right'}>
 					<div style={{ height: '50px' }}>
 						<Button
-							size='md'
+							size="md"
 							width="90%"
 							disabled={!indexActive}
 							text={indexActive ? 'Select' : undefined}

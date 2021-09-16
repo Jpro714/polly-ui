@@ -1,20 +1,20 @@
-import { useCallback, useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js/bignumber'
-import Web3 from 'web3'
 import { Multicall as MC } from 'ethereum-multicall'
-import Multicall from '../utils/multicall'
-import GraphUtil from '../utils/graph'
-import { decimate } from '../utils/formatBalance'
+import { useCallback, useEffect, useState } from 'react'
+import Web3 from 'web3'
+import { AbiItem } from 'web3-utils'
+import erc20Abi from '../bao/lib/abi/erc20.json'
+// LP Contract ABI
+import lpAbi from '../bao/lib/abi/uni_v2_lp.json'
 import {
   addressMap,
   contractAddresses,
-  supportedPools,
+  supportedPools
 } from '../bao/lib/constants'
+import { decimate } from '../utils/formatBalance'
+import GraphUtil from '../utils/graph'
+import Multicall from '../utils/multicall'
 
-// LP Contract ABI
-import lpAbi from '../bao/lib/abi/uni_v2_lp.json'
-import erc20Abi from '../bao/lib/abi/erc20.json'
-import { AbiItem } from 'web3-utils'
 
 export const fetchLPInfo = async (farms: any[], multicall: MC, web3: Web3) => {
   const results = Multicall.parseCallResults(
@@ -123,13 +123,21 @@ const useAllFarmTVL = (web3: Web3, multicall: MC) => {
         _tvl = _tvl.plus(lpStakedUSD)
       } else {
         let token, tokenPrice, specialPair
-        if (lpInfo.tokens[0].address.toLowerCase() === addressMap.POLLY.toLowerCase() &&
-          lpInfo.tokens[1].address.toLowerCase() === addressMap.nDEFI.toLowerCase()) {
+        if (
+          lpInfo.tokens[0].address.toLowerCase() ===
+            addressMap.POLLY.toLowerCase() &&
+          lpInfo.tokens[1].address.toLowerCase() ===
+            addressMap.nDEFI.toLowerCase()
+        ) {
           // POLLY-nDEFI pair
           token = lpInfo.tokens[1]
           specialPair = true
-        } else if (lpInfo.tokens[0].address.toLowerCase() === addressMap.WETH.toLowerCase() ||
-          lpInfo.tokens[0].address.toLowerCase() === addressMap.RAI.toLowerCase())
+        } else if (
+          lpInfo.tokens[0].address.toLowerCase() ===
+            addressMap.WETH.toLowerCase() ||
+          lpInfo.tokens[0].address.toLowerCase() ===
+            addressMap.RAI.toLowerCase()
+        )
           // *-wETH pair and *-RAI pair
           token = lpInfo.tokens[0]
         else token = lpInfo.tokens[1]
@@ -137,19 +145,21 @@ const useAllFarmTVL = (web3: Web3, multicall: MC) => {
         if (token.address.toLowerCase() === addressMap.WETH.toLowerCase())
           // *-wETH pair
           tokenPrice = wethPrice
-        else if (token.address.toLowerCase() === addressMap.nDEFI.toLowerCase() && specialPair)
+        else if (
+          token.address.toLowerCase() === addressMap.nDEFI.toLowerCase() &&
+          specialPair
+        )
           // POLLY-nDEFI pair
           tokenPrice = Object.values(tokenPrices).find(
             (priceInfo) =>
               priceInfo.address.toLowerCase() ===
               addressMap.nDEFI.toLowerCase(),
           ).price
+        // *-RAI pair
         else
-          // *-RAI pair
           tokenPrice = Object.values(tokenPrices).find(
             (priceInfo) =>
-              priceInfo.address.toLowerCase() ===
-              addressMap.RAI.toLowerCase(),
+              priceInfo.address.toLowerCase() === addressMap.RAI.toLowerCase(),
           ).price
 
         lpStakedUSD = token.balance

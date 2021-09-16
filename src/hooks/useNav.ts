@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
-import _ from 'lodash'
-import { NestComponent } from '../contexts/Nests/types'
 import BigNumber from 'bignumber.js'
-import GraphUtil from '../utils/graph'
+import _ from 'lodash'
+import { useEffect, useState } from 'react'
 import { addressMap } from '../bao/lib/constants'
+import { NestComponent } from '../contexts/Nests/types'
+import GraphUtil from '../utils/graph'
 
 const useNav = (composition: Array<NestComponent>, supply: BigNumber) => {
   const [nav, setNav] = useState<

@@ -1,7 +1,7 @@
+import { Multicall } from 'ethereum-multicall'
 import React, { createContext, useEffect, useState } from 'react'
 import { useWallet } from 'use-wallet'
 import useBao from '../../hooks/useBao'
-import { Multicall } from 'ethereum-multicall'
 
 export interface MulticallContext {
 	multicall?: Multicall

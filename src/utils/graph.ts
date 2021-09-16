@@ -26,7 +26,11 @@ const clients = {
 const _getClient = (network: string) =>
   network.toLowerCase() === 'matic' ? clients.matic : clients.mainnet
 
-const _querySubgraph = (query: string, network = 'matic', _client?: ApolloClient<any>) => {
+const _querySubgraph = (
+  query: string,
+  network = 'matic',
+  _client?: ApolloClient<any>,
+) => {
   const client = _client || _getClient(network)
   return new Promise((resolve, reject) => {
     client

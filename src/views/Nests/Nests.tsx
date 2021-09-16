@@ -20,7 +20,11 @@ const Nests: React.FC = () => {
 				{account && ethereum.chainId === '0x89' ? (
 					<>
 						<Route exact path={path}>
-							<PageHeader icon={pollyNests} title="Nests" subtitle="Tokenized baskets with autonomous yield bearing strategies!" />
+							<PageHeader
+								icon={pollyNests}
+								title="Nests"
+								subtitle="Tokenized baskets with autonomous yield bearing strategies!"
+							/>
 							<NestList />
 						</Route>
 						<Route path={`${path}/:nestId`}>
