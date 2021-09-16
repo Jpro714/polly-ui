@@ -87,7 +87,7 @@ const NestListItem: React.FC<NestListItemProps> = ({ nest }) => {
 							<>
 								<span
 									style={{
-										color: indexPriceChange24h.gt(0) ? 'green' : 'red',
+										color: indexPriceChange24h.gt(0) ? '${(props) => props.theme.color.green}' : '${(props) => props.theme.color.red}',
 									}}
 								>
 									{priceHistory && getDisplayBalance(indexPriceChange24h, 0)}

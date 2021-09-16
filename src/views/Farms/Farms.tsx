@@ -17,6 +17,7 @@ import { Badge } from 'react-bootstrap'
 import { getDisplayBalance } from 'utils/formatBalance'
 import { SpinnerLoader } from 'components/Loader'
 import { BigNumber } from 'bignumber.js'
+import { StyledExternalLink, StyledInfo } from './components/styles'
 
 const Farms: React.FC = () => {
 	const { path } = useRouteMatch()
@@ -38,7 +39,7 @@ const Farms: React.FC = () => {
 							<Container>
 								<StyledInfo>
 									❗️{' '}
-									<span style={{ fontWeight: 600, color: '#ff3333' }}>
+									<span style={{ fontWeight: 700, color: '${(props) => props.theme.color.red}' }}>
 										Attention:
 									</span>{' '}
 									Be sure to read the{' '}
@@ -80,25 +81,5 @@ const Farms: React.FC = () => {
 		</Switch>
 	)
 }
-
-const StyledInfo = styled.h3`
-	color: ${(props) => props.theme.color.text[100]};
-	font-size: 1rem;
-	font-weight: 400;
-	margin: 0;
-	padding: 0;
-`
-
-const StyledExternalLink = styled.a`
-	color: ${(props) => props.theme.color.text[100]};
-	font-weight: ${(props) => props.theme.fontWeight.strong};
-	text-decoration: none;
-	&:hover {
-		color: ${(props) => props.theme.color.link[100]};
-	}
-	&.active {
-		color: ${(props) => props.theme.color.link[100]};
-	}
-`
 
 export default Farms
