@@ -26,6 +26,7 @@ import { getContract } from 'utils/erc20'
 import { decimate, getDisplayBalance } from 'utils/formatBalance'
 import { provider } from 'web3-core'
 import NDEFI from './components/explanations/nDEFI'
+import NSTBL from './components/explanations/nSTBL'
 import IssueModal from './components/IssueModal'
 import NavModal from './components/NavModal'
 import { Progress } from './components/Progress'
@@ -381,7 +382,7 @@ const Nest: React.FC = () => {
 								onClick={() => setAllocationDisplayType(false)}
 								active={!allocationDisplayType}
 								style={{ marginTop: '0px', borderColor: 'transparent' }}
-								>
+							>
 								<FontAwesomeIcon icon="table" />
 							</BootButton>
 							<BootButton
@@ -389,7 +390,7 @@ const Nest: React.FC = () => {
 								onClick={() => setAllocationDisplayType(true)}
 								active={allocationDisplayType}
 								style={{ marginTop: '0px', borderColor: 'transparent' }}
-								>
+							>
 								<FontAwesomeIcon icon="chart-pie" />
 							</BootButton>
 						</PrefButtons>
@@ -486,6 +487,8 @@ const Nest: React.FC = () => {
 				<NestExplanation>
 					{nestTokenAddress ===
 						'0xd3f07EA86DDf7BAebEfd49731D7Bbd207FedC53B' && <NDEFI />}
+					{nestTokenAddress ===
+						'0x0078AdADFF70E22EDABb0150eE54824133EBe713' && <NSTBL />}
 				</NestExplanation>
 			</NestBox>
 		</>

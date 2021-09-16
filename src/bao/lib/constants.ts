@@ -39,7 +39,10 @@ export const addressMap = {
   BAO: '0xc81278a52ad0e1485b7c3cdf79079220ddd68b7d',
   POLLY: '0x4C392822D4bE8494B798cEA17B43d48B2308109C',
   nDEFI: '0xd3f07EA86DDf7BAebEfd49731D7Bbd207FedC53B',
+  nSTBL: '0x0078AdADFF70E22EDABb0150eE54824133EBe713', //test nSTBL
   RAI: '0x00e5646f60ac6fb446f621d146b6e1886f002905',
+  DAI: '0x8f3cf7ad23cd3cadbd9735aff958023239c6a063',
+  FRAX: '0x104592a158490a9228070e0a8e5343b499e125d0',
   DEAD: '0x000000000000000000000000000000000000dead',
 }
 
@@ -55,6 +58,9 @@ export const contractAddresses = {
   },
   recipe: {
     137: '0x2E62EE5005c4069e82d37479f42D1a7Aa2C1B8ba',
+  },
+  recipev2: {
+    137: '0x654ceF120F3064Fb5c2f5CA778b73d361e4bFd1d'
   },
   wethPrice: {
     137: '0xF9680D99D6C9589e2a93a78A04A279e509205945',
@@ -504,6 +510,24 @@ export const supportedNests: SupportedNest[] = [
       UMA: '#FF494A',
       ALPHA: '#27B2FE',
       BAL: '#b9b9b9',
+    },
+  },
+  {
+    nid: 2,
+    nestAddresses: {
+      137: '0x0078AdADFF70E22EDABb0150eE54824133EBe713',
+    },
+    inputToken: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
+    outputToken: '0x0078AdADFF70E22EDABb0150eE54824133EBe713',
+    symbol: 'nSTBL',
+    name: 'nSTBL',
+    icon: '/nstbl.svg',
+    pieColors: {
+      FRAX: '#b9b9b9',
+      DAI: '#fbde77',
+      USDC: '#2775CA',
+      USDT: '#12946c',
+      RAI: '#42f9d1',
     },
   },
 ]

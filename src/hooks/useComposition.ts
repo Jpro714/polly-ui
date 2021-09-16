@@ -3,7 +3,12 @@ import { Nest, NestComponent } from 'contexts/Nests/types'
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { useWallet } from 'use-wallet'
-import { getBalance, getContract, getCreamContract } from 'utils/erc20'
+import {
+  getBalance,
+  getContract,
+  getCreamContract,
+  getKashiContract,
+} from 'utils/erc20'
 import { decimate, getBalanceNumber } from 'utils/formatBalance'
 import GraphClient from 'utils/graph'
 import MultiCall from 'utils/multicall'
@@ -84,16 +89,24 @@ const useComposition = (nest: Nest) => {
                   component.toLowerCase(),
                 )
               )
-                mcContracts.push({
-                  ref: 'creamContract',
-                  contract: getCreamContract(ethereum, component),
-                  calls: [{ method: 'exchangeRateCurrent' }],
-                })
+                mcContracts.push(
+                  {
+                    ref: 'creamContract',
+                    contract: getCreamContract(ethereum, component),
+                    calls: [{ method: 'exchangeRateCurrent' }],
+                  },
+                  {
+                    ref: 'kashiLending',
+                    contract: getKashiContract(ethereum, component),
+                    calls: [{ method: 'exchangeRate' }],
+                  },
+                )
               const _multicallContext = MultiCall.createCallContext(mcContracts)
               const {
                 specialContract: results,
                 componentToken: componentResults,
                 creamContract: creamResults,
+                kashiContract: kashiResults,
               } = MultiCall.parseCallResults(
                 await multicall.call(_multicallContext),
               )
@@ -106,6 +119,27 @@ const useComposition = (nest: Nest) => {
                 const exchangeRate = new BigNumber(
                   creamResults[0].values[0].hex,
                 )
+                const underlying = getBalanceNumber(
+                  new BigNumber(exchangeRate).times(componentBalance),
+                  18,
+                )
+                baseBalance = decimate(underlying, 18)
+                basePrice = new BigNumber(price)
+                price = new BigNumber(price).times(
+                  new BigNumber(
+                    getBalanceNumber(new BigNumber(underlying).plus(1)),
+                  ).div(
+                    getBalanceNumber(
+                      new BigNumber(componentBalance),
+                      specialDecimals,
+                    ),
+                  ),
+                )
+              }
+
+              if (_getStrategy(specialSymbol) === 'KASHI') {
+                const exchangeRate = new BigNumber(kashiResults)
+
                 const underlying = getBalanceNumber(
                   new BigNumber(exchangeRate).times(componentBalance),
                   18,
@@ -199,6 +233,7 @@ const SPECIAL_TOKEN_ADDRESSES: any = {
   '0x3fae5e5722c51cdb5b0afd8c7082e8a6af336ee8': addressMap.MATIC, // crMATIC
   '0x468a7bf78f11da82c90b17a93adb7b14999af5ab': addressMap.SUSHI, // crSUSHI
   '0xd4409b8d17d5d49a7ed9ae734b0e8edba29b9ffa': addressMap.SNX, // crSNX
+  '0x12d7906b1c9a2e0f73d251bafdbd369fed6f8c64': addressMap.DAI, // kmWETH/DAI-LINK
 }
 
 // Special cases for token addresses (i.e. lending strategies)
@@ -206,7 +241,13 @@ const _getTokenAddress = (tokenAddress: string) =>
   SPECIAL_TOKEN_ADDRESSES[tokenAddress.toLowerCase()] || tokenAddress
 
 const _getStrategy = (symbol: string) =>
-  symbol.startsWith('cr') ? 'CREAM' : symbol.startsWith('am') ? 'AAVE' : 'NONE'
+  symbol.startsWith('cr')
+    ? 'CREAM'
+    : symbol.startsWith('am')
+    ? 'AAVE'
+    : symbol.startsWith('km')
+    ? 'KASHI'
+    : 'NONE'
 
 // Special cases for image URLS, i.e. wrapped assets
 const _getImageURL = (symbol: string) =>

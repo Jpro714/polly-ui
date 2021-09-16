@@ -19,7 +19,7 @@ export const getAnalytics = (balance: BigNumber, decimals = 18) => {
   const analytic = displayBalance.toNumber()
 
   if (displayBalance.isGreaterThanOrEqualTo(1000000000)) {
-    return (analytic / 1000000000).toFixed(2).replace(/\.0$/, '') + 'G'
+    return (analytic / 1000000000).toFixed(2).replace(/\.0$/, '') + 'B'
   }
   if (displayBalance.isGreaterThanOrEqualTo(1000000)) {
     return (analytic / 1000000).toFixed(2).replace(/\.0$/, '') + 'M'
